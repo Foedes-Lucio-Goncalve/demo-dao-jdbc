@@ -4,7 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import db.DB;
 import db.DbException;
@@ -78,7 +81,7 @@ public class VendedorDaoJDBC implements VendedorDao {
 
 	private Departamento instanciaDepartamento(ResultSet rs) throws SQLException {
 		Departamento dep = new Departamento();
-		dep.setId(rs.getInt("id"));
+		dep.setId(rs.getInt("departmentId"));
 		dep.setName(rs.getString("depnome"));
 		return dep;
 	}
@@ -97,6 +100,52 @@ public class VendedorDaoJDBC implements VendedorDao {
 	public List<Vendedor> findall() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<Vendedor> findByDepartamento(Departamento departamento) {
+		PreparedStatement st = null;
+		ResultSet rs = null;
+		try {
+			st = conn.prepareStatement(
+					"select seller.*,dp.Name as depnome from seller " 
+					+ " inner join department dp " 
+					+ " on seller.departmentId = dp.Id "
+					+ " where departmentId = ? "	
+					+ "ORDER BY Name"
+           );
+			st.setInt(1, departamento.getId());
+			//st.setInt(1, 2 );
+			
+			rs = st.executeQuery();
+			
+			List<Vendedor> lista = new ArrayList<>();
+			Map<Integer,Departamento> map = new HashMap<>();
+			
+			while(rs.next())
+			{
+				Departamento dep = map.get(rs.getInt("id"));
+				
+				if(dep == null)
+				{
+				 dep = instanciaDepartamento(rs);
+					map.put(rs.getInt("id"), dep);
+				}
+											
+				Vendedor obj =  instanciaVendedor(rs,dep);
+				lista.add(obj);				
+			}
+			return lista;
+		}
+			catch(SQLException e )
+			{ 
+				throw new DbException(e.getMessage());
+			}
+			finally {
+				DB.closeStatement(st);
+				DB.closeResultSet(rs);
+			}
+		
 	}
 	
 }
