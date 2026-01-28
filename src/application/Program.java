@@ -17,8 +17,9 @@ public class Program {
 		Vendedor cvendedor = vendedordao.findById(1);
 		
 		
-		System.out.println(depto);
-		System.out.println(vendedor);
+		//System.out.println(depto);
+		//System.out.println(vendedor);
+		System.out.println("***** teste findBYId *****");
 		System.out.println("consulta vendedores: " + cvendedor);
 
 

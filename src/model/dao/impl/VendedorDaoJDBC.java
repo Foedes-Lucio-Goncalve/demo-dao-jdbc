@@ -53,17 +53,10 @@ public class VendedorDaoJDBC implements VendedorDao {
 			rs = st.executeQuery();
 			if(rs.next())
 			{
-				Departamento dep = new Departamento();
-				dep.setId(rs.getInt("id"));
-				dep.setName(rs.getString("depnome"));
+				Departamento dep = instanciaDepartamento(rs);			
 				
-				Vendedor obj = new Vendedor();
-				obj.setId(rs.getInt("id"));
-				obj.setNome(rs.getString("Name"));
-			    obj.setEmail(rs.getString("Email"));
-			    obj.setSalarioBase(rs.getDouble("BaseSalary"));
-		        obj.setDataAniversario(rs.getDate("BirthDate"));
-		        obj.setDepartamento(dep);
+				Vendedor obj =  instanciaVendedor(rs,dep);
+				
 				return obj;
 			}
 			else
@@ -82,6 +75,23 @@ public class VendedorDaoJDBC implements VendedorDao {
 		}
 	
 
+
+	private Departamento instanciaDepartamento(ResultSet rs) throws SQLException {
+		Departamento dep = new Departamento();
+		dep.setId(rs.getInt("id"));
+		dep.setName(rs.getString("depnome"));
+		return dep;
+	}
+	private Vendedor instanciaVendedor(ResultSet rs,Departamento dep) throws SQLException {
+	Vendedor obj = new Vendedor();
+	obj.setId(rs.getInt("id"));
+	obj.setNome(rs.getString("Name"));
+    obj.setEmail(rs.getString("Email"));
+    obj.setSalarioBase(rs.getDouble("BaseSalary"));
+    obj.setDataAniversario(rs.getDate("BirthDate"));
+    obj.setDepartamento(dep);
+    return obj;
+	}
 
 	@Override
 	public List<Vendedor> findall() {
