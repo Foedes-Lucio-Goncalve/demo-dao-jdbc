@@ -23,7 +23,7 @@ public class Departamento implements Serializable{
 		return id;
 	}
 
-	public void setId(Int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

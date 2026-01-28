@@ -14,9 +14,12 @@ public class Program {
 		Vendedor vendedor = new Vendedor(1,"pedro","pedro@gmail.com", new Date(),2000.0,depto);
 		
 		VendedorDao vendedordao = FabricaDao.createVendedorDao();
+		Vendedor cvendedor = vendedordao.findById(1);
+		
 		
 		System.out.println(depto);
 		System.out.println(vendedor);
+		System.out.println("consulta vendedores: " + cvendedor);
 
 
 	}
