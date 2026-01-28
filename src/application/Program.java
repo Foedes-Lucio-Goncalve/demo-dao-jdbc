@@ -2,6 +2,8 @@ package application;
 
 import java.util.Date;
 
+import model.dao.FabricaDao;
+import model.dao.VendedorDao;
 import model.entities.Departamento;
 import model.entities.Vendedor;
 
@@ -11,6 +13,7 @@ public class Program {
 		Departamento depto = new Departamento(1,"livros");
 		Vendedor vendedor = new Vendedor(1,"pedro","pedro@gmail.com", new Date(),2000.0,depto);
 		
+		VendedorDao vendedordao = FabricaDao.createVendedorDao();
 		
 		System.out.println(depto);
 		System.out.println(vendedor);
