@@ -2,6 +2,7 @@ package application;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import model.dao.FabricaDao;
 import model.dao.VendedorDao;
@@ -11,6 +12,9 @@ import model.entities.Vendedor;
 public class Program {
 
 	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
 		Departamento depto = new Departamento(1,"livros");
 		Vendedor vendedor = new Vendedor(1,"pedro","pedro@gmail.com", new Date(),2000.0,depto);
 		
@@ -18,8 +22,8 @@ public class Program {
 		Vendedor cvendedor = vendedordao.findById(1);
 		
 		
-		//System.out.println(depto);
-		//System.out.println(vendedor);
+		System.out.println(depto);
+		System.out.println(vendedor);
 		System.out.println("***** teste1  findBYId *****");
 		System.out.println("consulta vendedores: " + cvendedor);
    		
@@ -45,11 +49,17 @@ public class Program {
 		System.out.println("registro incluido" + novoVendedor + " novo id.gerado.. "+ novoVendedor.getId());
 		System.out.println("***** teste5  update *****");
 		 novoVendedor = vendedordao.findById(1);
-		 System.out.println(novoVendedor);
+		System.out.println(novoVendedor);
 		 novoVendedor.setNome("maria jose");
 		 System.out.println("nome alterado" + novoVendedor);
 		 vendedordao.update(novoVendedor);
 		 System.out.println("update completado");
+		 System.out.println("***** teste5  delecao *****");
+		 System.out.println("entre com id para delecao");
+		 int idDelecao = sc.nextInt();
+		 vendedordao.deleteById(idDelecao);
+		 System.out.println("delecao efetuada com sucesso...." + idDelecao);
+		 sc.close();
 	}
 
 }
