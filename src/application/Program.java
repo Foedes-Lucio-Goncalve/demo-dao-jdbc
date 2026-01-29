@@ -39,10 +39,17 @@ public class Program {
 			System.out.println(obj);
 		}
 
-		System.out.println("***** teste4  findall *****");
+		System.out.println("***** teste4  insertl *****");
 		Vendedor novoVendedor = new Vendedor(null,"jose","jose@hotmail.com",new Date(),3000.0,deps);
 		vendedordao.insert(novoVendedor);
 		System.out.println("registro incluido" + novoVendedor + " novo id.gerado.. "+ novoVendedor.getId());
+		System.out.println("***** teste5  update *****");
+		 novoVendedor = vendedordao.findById(1);
+		 System.out.println(novoVendedor);
+		 novoVendedor.setNome("maria jose");
+		 System.out.println("nome alterado" + novoVendedor);
+		 vendedordao.update(novoVendedor);
+		 System.out.println("update completado");
 	}
 
 }
