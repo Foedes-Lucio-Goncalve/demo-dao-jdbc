@@ -22,7 +22,7 @@ public class Program {
 		//System.out.println(vendedor);
 		System.out.println("***** teste1  findBYId *****");
 		System.out.println("consulta vendedores: " + cvendedor);
-		
+   		
 		System.out.println("***** teste2  findBYId *****");
 		Departamento deps = new Departamento(2, null);
 		List<Vendedor> list =  vendedordao.findByDepartamento(deps);
@@ -39,6 +39,10 @@ public class Program {
 			System.out.println(obj);
 		}
 
+		System.out.println("***** teste4  findall *****");
+		Vendedor novoVendedor = new Vendedor(null,"jose","jose@hotmail.com",new Date(),3000.0,deps);
+		vendedordao.insert(novoVendedor);
+		System.out.println("registro incluido" + novoVendedor + " novo id.gerado.. "+ novoVendedor.getId());
 	}
 
 }
