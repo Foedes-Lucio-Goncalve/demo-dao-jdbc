@@ -31,6 +31,13 @@ public class Program {
 			System.out.println(obj);
 		}
 
+		System.out.println("***** teste3  findall *****");
+		
+		List<Vendedor> lista =  vendedordao.findall();
+		for(Vendedor obj: lista)
+		{
+			System.out.println(obj);
+		}
 
 	}
 
